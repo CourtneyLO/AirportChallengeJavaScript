@@ -11,7 +11,7 @@ describe("Weather", function(){
   });
 
   it("will return sunny", function() {
-    spyOn(weather, "condition").and.returnValue("sunny"));
+    spyOn(weather, "condition").and.returnValue("sunny");
     expect(weather.condition()).toEqual("sunny");
   });
 
