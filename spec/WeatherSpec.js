@@ -5,6 +5,10 @@ describe("Weather", function(){
     weather = new Weather();
   })
 
+  it("should initialize with possible weather conditions", function() {
+    expect(weather.POSSIBLECONDITIONS).toEqual(["sunny", "sunny", "stormy", "sunny"])
+  });
+
   it("will return stormy", function() {
     spyOn(weather, "condition").and.returnValue("stormy");
     expect(weather.condition()).toEqual("stormy");

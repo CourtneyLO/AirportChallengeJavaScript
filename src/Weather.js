@@ -1,9 +1,8 @@
 function Weather() {
-
+  this.POSSIBLECONDITIONS = ["sunny", "sunny", "stormy", "sunny"]
 }
 
 Weather.prototype.condition = function() {
-  possibleConditions = ["sunny", "sunny", "stormy", "sunny"]
-  var weatherConditions = possibleConditions[Math.floor(Math.random() * possibleConditions.length)];
-  return weatherConditions
+  var weatherConditions = this.POSSIBLECONDITIONS[Math.floor(Math.random() * this.POSSIBLECONDITIONS.length)];
+  return weatherConditions;
 };
