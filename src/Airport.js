@@ -1,11 +1,12 @@
 function Airport(weather) {
   this.planes = [];
-
   this.weather = weather;
 };
 
   Airport.prototype.landPlane = function(plane) {
-    if (!this.isStormy()) {
+    if (this.isStormy()) {
+      throw new Error("Plane cannot land: the weather is too stormy")
+    } else {
       return this.planes.push(plane);
     }
 
@@ -16,5 +17,5 @@ function Airport(weather) {
   };
 
   Airport.prototype.isStormy = function() {
-    weather.condition() == "stormy"
+    return this.weather.condition() == "stormy"
   };
