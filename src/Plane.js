@@ -3,6 +3,9 @@ function Plane() {
 };
 
 Plane.prototype.land = function() {
+  if (this.inFlight == false) {
+    throw new Error("Plane cannot land: Plan has already landed")
+  }
   this.inFlight = false;
 };
 

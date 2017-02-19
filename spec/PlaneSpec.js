@@ -20,6 +20,13 @@ describe("Plane", function(){
     expect(plane.inFlight).toEqual(true);
   });
 
+  it("should raise an error if the plane is in airport but land plane is called", function(){
+console.log(plane.inFlight)
+    plane.land();
+    console.log(plane.inFlight)
+    expect(function() {plane.land()}).toThrowError("Plane cannot land: Plan has already landed")
+  });
+
   it("should raise an error if the plane is already in flight but take off is called", function() {
     plane.land();
     plane.takeOff();

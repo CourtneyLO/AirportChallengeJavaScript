@@ -73,14 +73,15 @@ describe("Airport", function() {
       beforeEach(function(){
         spyOn(weather, 'condition' ).and.returnValue("sunny")
         airport = new Airport(weather);
-        plane = new Plane()
 
         var i = 0;
         do {
+          var plane = new Plane()
           airport.landPlane(plane)
           i++;
         }
         while (i < 10);
+
 
       });
 
