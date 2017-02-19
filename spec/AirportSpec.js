@@ -9,9 +9,13 @@ describe("Airport", function() {
     plane = jasmine.createSpy('plane')
   });
 
-  it("should initiate the airport with an empty plane array", function() {
+  it("should initialize the airport with an empty plane array", function() {
     expect(airport.planes).toEqual([]);
   });
+
+  it("should initialize the airport with a constant of full capacity of 10", function() {
+    expect(airport.FULLCAPACITY).toEqual(10)
+  })
 
   it("allows the plane to land and shows the plane is in the airport", function() {
     airport.landPlane(plane);
@@ -27,6 +31,7 @@ describe("Airport", function() {
   it("should return false if sunny", function() {
     expect(airport.isStormy()).toBe(false)
   })
+
 });
 
   describe("When weather is stormy", function() {
