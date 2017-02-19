@@ -19,7 +19,8 @@ describe("Airport", function() {
   });
 
   it("allows the plane to takeoff and shows the plane is no longer in the airport", function() {
-    airport.takeoffPlane(plane);
+    airport.landPlane(plane);
+    airport.takeoffPlane();
     expect(airport.planes).toEqual([]);
   });
 
@@ -43,6 +44,11 @@ describe("Airport", function() {
 
     it("should return true if stormy", function() {
       expect(airport.isStormy()).toBe(true);
+    });
+
+    it("should throw an error if a plan tries to take off in stormy weather", function() {
+      airport.planes = [plane]
+      expect(function() {airport.takeoffPlane()}).toThrowError("Plane cannot take off: The weather is too stormy")
     });
 
 });

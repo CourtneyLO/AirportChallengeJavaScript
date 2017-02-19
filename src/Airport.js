@@ -12,8 +12,12 @@ function Airport(weather) {
 
   };
 
-  Airport.prototype.takeoffPlane = function(plane) {
-    delete this.planes[plane];
+  Airport.prototype.takeoffPlane = function() {
+    if (this.isStormy()) {
+      throw new Error("Plane cannot take off: The weather is too stormy")
+    } else {
+      return this.planes.pop();
+    }
   };
 
   Airport.prototype.isStormy = function() {
