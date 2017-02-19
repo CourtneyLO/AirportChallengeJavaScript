@@ -52,6 +52,11 @@ describe("Airport", function() {
     expect(function() {airport.landPlane(plane)}).toThrowError("Plane cannot land: The airport is full")
   });
 
+  it("capacity should be able to to changed", function() {
+    airport = new Airport(weather, 2);
+    expect(airport.FULLCAPACITY).toEqual(2);
+  });
+
 });
 
   describe("When weather is stormy", function() {
