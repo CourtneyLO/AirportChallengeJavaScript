@@ -32,6 +32,26 @@ describe("Airport", function() {
     expect(airport.isStormy()).toBe(false)
   })
 
+  it("should return true if airport capacity if full", function() {
+    var i = 0;
+    do {
+      airport.landPlane(plane)
+      i++;
+    }
+    while (i < 10);
+    expect(airport.isFullCapacity()).toBe(true)
+  })
+
+  it("should not allow a plane to land if the capacity at the airport it full", function() {
+    var i = 0;
+    do {
+      airport.landPlane(plane)
+      i++;
+    }
+    while (i < 10);
+    expect(function() {airport.landPlane(plane)}).toThrowError("Plane cannot land: The airport is full")
+  });
+
 });
 
   describe("When weather is stormy", function() {
