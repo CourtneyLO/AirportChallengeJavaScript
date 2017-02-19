@@ -8,7 +8,8 @@ function Airport(weather, capacity) {
     if (this.isStormy() || this.isFullCapacity()) {
       return this.restrictedLanding();
     } else {
-      return this.planes.push(plane);
+      plane.land();
+      this.planes.push(plane);
     }
 
   };
@@ -17,15 +18,16 @@ function Airport(weather, capacity) {
     if (this.isStormy()) {
       throw new Error("Plane cannot take off: The weather is too stormy");
     } else {
-      return this.planes.pop();
+      var plane = this.planes.pop();
+      plane.takeOff()
     }
   };
 
   Airport.prototype.restrictedLanding = function() {
-    if (this.isStormy()) {
-      throw new Error("Plane cannot land: the weather is too stormy");
-    } else {
+    if (this.isFullCapacity()) {
       throw new Error("Plane cannot land: The airport is full");
+    } else {
+      throw new Error("Plane cannot land: the weather is too stormy");
     }
   };
 

@@ -6,7 +6,7 @@ describe("Airport", function() {
     weather = new Weather();
     spyOn(weather, 'condition' ).and.returnValue("sunny")
     airport = new Airport(weather);
-    plane = jasmine.createSpy('plane')
+    plane = new Plane()
   });
 
   it("should initialize the airport with an empty plane array", function() {
@@ -29,8 +29,19 @@ describe("Airport", function() {
   });
 
   it("should return false if sunny", function() {
-    expect(airport.isStormy()).toBe(false)
-  })
+    expect(airport.isStormy()).toBe(false);
+  });
+
+  it("should return a plane inflight status of false when landed", function() {
+    airport.landPlane(plane);
+    expect(plane.inFlight).toEqual(false);
+  });
+
+  it("should return a plane inflight status to true when flying", function() {
+    airport.landPlane(plane);
+    airport.takeoffPlane();
+    expect(plane.inFlight).toEqual(true);
+  });
 
 });
 
@@ -39,7 +50,7 @@ describe("Airport", function() {
     beforeEach(function(){
       spyOn(weather, 'condition' ).and.returnValue("stormy")
       airport = new Airport(weather);
-      plane = jasmine.createSpy('plane')
+      plane = new Plane()
     });
 
     it("should throw an error if a plane tries to land i stormy weather", function() {
@@ -62,7 +73,7 @@ describe("Airport", function() {
       beforeEach(function(){
         spyOn(weather, 'condition' ).and.returnValue("sunny")
         airport = new Airport(weather);
-        plane = jasmine.createSpy('plane')
+        plane = new Plane()
 
         var i = 0;
         do {
