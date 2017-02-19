@@ -32,31 +32,6 @@ describe("Airport", function() {
     expect(airport.isStormy()).toBe(false)
   })
 
-  it("should return true if airport capacity if full", function() {
-    var i = 0;
-    do {
-      airport.landPlane(plane)
-      i++;
-    }
-    while (i < 10);
-    expect(airport.isFullCapacity()).toBe(true)
-  })
-
-  it("should not allow a plane to land if the capacity at the airport it full", function() {
-    var i = 0;
-    do {
-      airport.landPlane(plane)
-      i++;
-    }
-    while (i < 10);
-    expect(function() {airport.landPlane(plane)}).toThrowError("Plane cannot land: The airport is full")
-  });
-
-  it("capacity should be able to to changed", function() {
-    airport = new Airport(weather, 2);
-    expect(airport.FULLCAPACITY).toEqual(2);
-  });
-
 });
 
   describe("When weather is stormy", function() {
@@ -69,7 +44,6 @@ describe("Airport", function() {
 
     it("should throw an error if a plane tries to land i stormy weather", function() {
       expect(function() {airport.landPlane(plane)}).toThrowError("Plane cannot land: the weather is too stormy")
-      expect(airport.planes).toEqual([]);
     });
 
     it("should return true if stormy", function() {
@@ -81,4 +55,35 @@ describe("Airport", function() {
       expect(function() {airport.takeoffPlane()}).toThrowError("Plane cannot take off: The weather is too stormy")
     });
 
-});
+  });
+
+    describe("When airport capacity is full", function(){
+
+      beforeEach(function(){
+        spyOn(weather, 'condition' ).and.returnValue("sunny")
+        airport = new Airport(weather);
+        plane = jasmine.createSpy('plane')
+
+        var i = 0;
+        do {
+          airport.landPlane(plane)
+          i++;
+        }
+        while (i < 10);
+
+      });
+
+      it("should return true if airport capacity if full", function() {
+        expect(airport.isFullCapacity()).toBe(true)
+      });
+
+      it("should not allow a plane to land if the capacity at the airport it full", function() {
+        expect(function() {airport.landPlane(plane)}).toThrowError("Plane cannot land: The airport is full")
+      });
+
+      it("capacity should be able to to changed", function() {
+        airport = new Airport(weather, 2);
+        expect(airport.FULLCAPACITY).toEqual(2);
+      });
+
+    });
