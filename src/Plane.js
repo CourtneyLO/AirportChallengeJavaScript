@@ -7,5 +7,9 @@ Plane.prototype.land = function() {
 };
 
 Plane.prototype.takeOff = function() {
-  this.inFlight = true;
+  if (this.inFlight == true){
+    throw new Error("Plane cannot take off: The plane is already in the air");
+  } else {
+    this.inFlight = true;
+  }
 };

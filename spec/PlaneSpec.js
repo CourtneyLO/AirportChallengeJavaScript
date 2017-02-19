@@ -19,4 +19,10 @@ describe("Plane", function(){
     plane.takeOff();
     expect(plane.inFlight).toEqual(true);
   });
+
+  it("should raise an error if the plane is already in flight but take off is called", function() {
+    plane.land();
+    plane.takeOff();
+    expect(function() {plane.takeOff()}).toThrowError("Plane cannot take off: The plane is already in the air")
+  });
 });
