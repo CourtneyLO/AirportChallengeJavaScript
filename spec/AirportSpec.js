@@ -2,10 +2,10 @@ describe("Airport", function() {
   var airport;
 
   beforeEach(function(){
-    airport = new Airport();
     weather = new Weather();
+    airport = new Airport(weather);
     plane = jasmine.createSpy('plane')
-    // spyOn(weather, 'condition' ).and.Return("sunny")
+    spyOn(weather, 'condition' ).and.returnValue("sunny")
   });
 
   it("should initiate the airport with an empty plane array", function() {
@@ -22,10 +22,5 @@ describe("Airport", function() {
     expect(airport.planes).toEqual([]);
   });
 
-  it("does not allow plane to land when it is stormy", function() {
-    spyOn(weather, "condition" ).andReturn("stormy")
-    airport.landPlane(plane);
-    expect(airport.planes).toEqual([]);
-  });
 
 });
