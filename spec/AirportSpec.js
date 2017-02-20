@@ -6,6 +6,7 @@ describe("Airport", function() {
     weather = new Weather();
     spyOn(weather, 'condition' ).and.returnValue("sunny")
     airport = new Airport(weather);
+    Gatwick = new Airport(weather)
     plane = new Plane()
   });
 
@@ -41,6 +42,11 @@ describe("Airport", function() {
     airport.landPlane(plane);
     airport.takeoffPlane();
     expect(plane.inFlight).toEqual(true);
+  });
+
+  it("should return which airport a plane is in", function() {
+    airport.landPlane(plane);
+    expect(plane.airport).toEqual(airport);
   });
 
 });
@@ -81,7 +87,6 @@ describe("Airport", function() {
           i++;
         }
         while (i < 10);
-
 
       });
 

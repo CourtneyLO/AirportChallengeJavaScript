@@ -3,6 +3,7 @@ describe("Plane", function(){
 
   beforeEach(function(){
     plane = new Plane();
+    airport = jasmine.createSpy("airport")
   });
 
   it("should be initialized as in flight", function(){
@@ -21,9 +22,7 @@ describe("Plane", function(){
   });
 
   it("should raise an error if the plane is in airport but land plane is called", function(){
-console.log(plane.inFlight)
     plane.land();
-    console.log(plane.inFlight)
     expect(function() {plane.land()}).toThrowError("Plane cannot land: Plan has already landed")
   });
 
@@ -32,4 +31,9 @@ console.log(plane.inFlight)
     plane.takeOff();
     expect(function() {plane.takeOff()}).toThrowError("Plane cannot take off: The plane is already in the air")
   });
+
+  it("should indictae which airport a plane is when it lands", function(){
+    plane.land(airport)
+    expect(plane.airport).toEqual(airport)
+  })
 });

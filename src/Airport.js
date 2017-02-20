@@ -8,7 +8,7 @@ function Airport(weather, capacity) {
     if (this.isStormy() || this.isFullCapacity()) {
       return this.restrictedLanding();
     } else {
-      plane.land();
+      plane.land(this);
       this.planes.push(plane);
     }
 
